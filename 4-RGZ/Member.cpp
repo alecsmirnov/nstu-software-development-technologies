@@ -46,8 +46,7 @@ void Member::setDegree(std::uint8_t degree) {
 
 // Получить одночлен в виде строки
 std::string Member::getStrMember() const {
-	return removeTrailingZeros(std::to_string(coefficient)) + "x^" + 
-							   std::to_string(degree);
+	return removeTrailingZeros(std::to_string(coefficient)) + "x^" + std::to_string(degree);
 }
 
 // Получить коэффициент
@@ -62,8 +61,7 @@ std::uint8_t Member::getDegree() const {
 
 // Дифференцировать
 Member Member::differentiate() const {
-	return degree ? Member(coefficient * degree, degree - 1) : 
-					Member(1, 0);
+	return degree ? Member(coefficient * degree, degree - 1) : Member(1, 0);
 }
 
 // Посчитать значение
@@ -120,11 +118,9 @@ Member Member::operator-(const Member& rhs) const {
 }
 
 Member Member::operator*(const Member& rhs) const {
-	return Member(coefficient * rhs.getCoefficient(), 
-				  degree + rhs.getDegree());
+	return Member(coefficient * rhs.getCoefficient(), degree + rhs.getDegree());
 }
 
 bool Member::operator==(const Member& rhs) const {
-	return coefficient == rhs.getCoefficient() &&
-		   degree == rhs.getDegree();
+	return coefficient == rhs.getCoefficient() && degree == rhs.getDegree();
 }
