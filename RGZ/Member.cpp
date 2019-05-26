@@ -3,8 +3,6 @@
 #include <cmath>
 #include <regex>
 
-constexpr std::uint8_t DEC_BASE = 10;			// Основание десятичного числа
-
 constexpr std::uint8_t COEFF_MATCH_NUM  = 1;	// Часть коэффициента в регулярном выражении
 constexpr std::uint8_t DEGREE_MATCH_NUM = 3;	// Часть степени в регулярном выражении
 
