@@ -17,6 +17,16 @@ Member::Member(std::string str_mem) {
 	setStrMember(str_mem);
 }
 
+// Установить коэффициент
+void Member::setCoefficient(double coeff) {
+	this->coeff = coeff;
+}
+
+// Установить степень
+void Member::setDegree(std::uint8_t degree) {
+	this->degree = degree;
+}
+
 // Задать новое значение одночлена в виде строки
 void Member::setStrMember(std::string str_mem) {
 	coeff = 0;
@@ -32,22 +42,6 @@ void Member::setStrMember(std::string str_mem) {
 	}
 }
 
-// Установить коэффициент
-void Member::setCoefficient(double coeff) {
-	this->coeff = coeff;
-}
-
-// Установить степень
-void Member::setDegree(std::uint8_t degree) {
-	this->degree = degree;
-}
-
-// Получить одночлен в виде строки
-std::string Member::getStrMember() const {
-	return removeTrailingZeros(std::to_string(coeff)) + "x^" + 
-							   std::to_string(degree);
-}
-
 // Получить коэффициент
 double Member::getCoefficient() const {
 	return coeff;
@@ -58,28 +52,19 @@ std::uint8_t Member::getDegree() const {
 	return degree;
 }
 
+// Получить одночлен в виде строки
+std::string Member::getStrMember() const {
+	return removeTrailingZeros(std::to_string(coeff)) + "x^" + std::to_string(degree);
+}
+
 // Дифференцировать
 Member Member::differentiate() const {
-	return degree ? Member(coeff * degree, degree - 1) : 
-					Member(1, 0);
+	return degree ? Member(coeff * degree, degree - 1) : Member(1, 0);
 }
 
 // Посчитать значение
 double Member::calculate(double x) const {
 	return coeff * std::pow(x, degree);
-}
-
-// Операции сложения и вычитания для одночлена
-Member Member::memberOperation(const Member& a, const Member& b, Operation operation) const {
-	Member new_member;
-
-	// Если степени равны -- выполнить операцию
-	if (a.getDegree() == b.getDegree()) {
-		new_member.setCoefficient(operation(a.getCoefficient(), b.getCoefficient()));
-		new_member.setDegree(a.getDegree());
-	}
-
-	return new_member;
 }
 
 // Проверка одночлена на вещественное число
@@ -106,21 +91,17 @@ Member Member::operator-() const {
 }
 
 Member Member::operator+(const Member& rhs) const {
-	return memberOperation(*this, rhs, [](double a_coef, double b_coef) -> double {
-		return a_coef + b_coef;
-	});
+	return Member(coeff + rhs.coeff, degree);
 }
 
 Member Member::operator-(const Member& rhs) const {
-	return memberOperation(*this, rhs, [](double a_coef, double b_coef) -> double {
-		return a_coef - b_coef;
-	});
+	return Member(coeff - rhs.coeff, degree);
 }
 
 Member Member::operator*(const Member& rhs) const {
-	return Member(coeff * rhs.getCoefficient(), degree + rhs.getDegree());
+	return Member(coeff * rhs.coeff, degree + rhs.degree);
 }
 
 bool Member::operator==(const Member& rhs) const {
-	return coeff == rhs.getCoefficient() && degree == rhs.getDegree();
+	return coeff == rhs.coeff && degree == rhs.degree;
 }

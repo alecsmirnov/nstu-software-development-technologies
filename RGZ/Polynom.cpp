@@ -34,32 +34,6 @@ void Polynom::setStrPolynom(std::string str_poly) {
 	}
 }
 
-// Получить полином в виде строки
-std::string Polynom::getStrPolynom() const {
-	std::string new_poly;
-
-	if (!data.empty()) {
-		data_t::size_type i = 0;
-		for (; i != data.size() - 1; ++i) {
-			// Получение одночлена в виде строки
-			new_poly += data[i].getStrMember();
-
-			// Формирование полинома из одночленов
-			if (0 < data[i + 1].getCoefficient())
-				new_poly += "+";
-		}
-
-		new_poly += data[i].getStrMember();
-	}
-
-	return new_poly;
-}
-
-// Получить полинмо в виде структуры хранения
-Polynom::data_t Polynom::getData() const {
-	return data;
-}
-
 // Получить коэффициент при степени
 double Polynom::getCoefficient(std::uint8_t degree) const {
 	double coeff = 0;
@@ -82,6 +56,32 @@ std::uint8_t Polynom::getDegree() const {
 			max_degree = member.getDegree();
 
 	return max_degree;
+}
+
+// Получить полинмо в виде структуры хранения
+Polynom::data_t Polynom::getData() const {
+	return data;
+}
+
+// Получить полином в виде строки
+std::string Polynom::getStrPolynom() const {
+	std::string new_poly;
+
+	if (!data.empty()) {
+		data_t::size_type i = 0;
+		for (; i != data.size() - 1; ++i) {
+			// Получение одночлена в виде строки
+			new_poly += data[i].getStrMember();
+
+			// Формирование полинома из одночленов
+			if (0 < data[i + 1].getCoefficient())
+				new_poly += "+";
+		}
+
+		new_poly += data[i].getStrMember();
+	}
+
+	return new_poly;
 }
 
 // Дифференцировать
@@ -179,7 +179,7 @@ Polynom Polynom::operator*(const Polynom& rhs) const {
 }
 
 bool Polynom::operator==(const Polynom& rhs) const {
-	return data.size() == rhs.size() && data == rhs.data;
+	return data.size() == rhs.data.size() && data == rhs.data;
 }
 
 // Формирование начального итератора

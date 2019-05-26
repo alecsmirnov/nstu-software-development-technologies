@@ -21,21 +21,19 @@ public:
 	// Задать новое значение полинома в виде строки
 	void setStrPolynom(std::string str_poly);
 
-	// Получить полином в виде строки
-	std::string getStrPolynom() const;
-	// Получить полинмо в виде структуры хранения
-	data_t getData() const;
-	
 	// Получить коэффициент при степени
 	double getCoefficient(std::uint8_t degree) const;
 	// Получить степень полинома
 	std::uint8_t getDegree() const;
+	// Получить полинмо в виде структуры хранения
+	data_t getData() const;
+	// Получить полином в виде строки
+	std::string getStrPolynom() const;
 
 	// Дифференцировать
 	Polynom differentiate() const;
 	// Посчитать значение
 	double calculate(double x) const;
-
 	// Очистить полином
 	void clear();
 
@@ -44,7 +42,6 @@ public:
 private:
 	// Привести подобные и упорядочить полином
 	static data_t adjust(data_t data);
-
 	// Операции сложения и вычитания для полинома
 	static Polynom polynomSum(const Polynom& lhs, const Polynom& rhs);
 
