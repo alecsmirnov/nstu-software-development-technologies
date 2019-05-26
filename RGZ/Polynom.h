@@ -14,7 +14,7 @@ public:
 
 public:
 	Polynom(double coeff = 0, std::uint8_t degree = 0);
-	Polynom(const Polynom& polynom);
+	Polynom(const Polynom& poly);
 	Polynom(const data_t& data);
 	Polynom(std::string str_poly);
 
