@@ -115,7 +115,7 @@ Polynom::~Polynom() {
 }
 
 // Привести подобные и упорядочить полином
-Polynom::data_t Polynom::adjust(data_t data) {
+Polynom::data_t Polynom::adjust(const data_t& data) {
 	data_t new_data;
 
 	if (!data.empty()) {
