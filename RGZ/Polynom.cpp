@@ -8,8 +8,8 @@ Polynom::Polynom(double coeff, std::uint8_t degree) {
 	data.push_back({ coeff, degree });
 }
 
-Polynom::Polynom(const Polynom& polynom) {
-	this->data = polynom.data;
+Polynom::Polynom(const Polynom& poly) {
+	data = poly.data;
 }
 
 Polynom::Polynom(const data_t& data) {
