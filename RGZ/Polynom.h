@@ -41,7 +41,7 @@ public:
 
 private:
 	// Привести подобные и упорядочить полином
-	static data_t adjust(data_t data);
+	static data_t adjust(const data_t& data);
 	// Операции сложения и вычитания для полинома
 	static Polynom polynomSum(const Polynom& lhs, const Polynom& rhs);
 
